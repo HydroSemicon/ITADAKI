@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">food (Demo)</string>
+  <string name="food_title" translatable="false">food</string>
+  <string name="home_tagline">いつもの店も、\nはじめての店も。</string>
+  <string name="demo_notice">複数の店舗を、ひとつのアプリで。\n架空の店舗を使った開発用デモです。</string>
+  <string name="home_restaurants_heading">お店を見つける</string>
+  <string name="demo_restaurant_label">サンプル店舗</string>
+  <string name="demo_next_steps">注文・会員機能は、これから追加します。</string>
+  <string name="demo_cafe_name">カフェ こもれび</string>
+  <string name="demo_cafe_description">コーヒーと軽食を、気軽に。</string>
+  <string name="demo_diner_name">食堂 まる</string>
+  <string name="demo_diner_description">毎日のごはんに、あたたかい定食を。</string>
+</resources>

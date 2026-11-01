@@ -1,0 +1,52 @@
+name: Android CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: android-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+        with:
+          # The legacy "tools" package is no longer available in the SDK repository.
+          packages: 'platform-tools'
+      - name: Install SDK packages
+        run: sdkmanager 'platforms;android-36' 'build-tools;35.0.0'
+      - name: Set up Gradle and validate Wrapper
+        uses: gradle/actions/setup-gradle@v4
+      - name: Build, lint and compile UI tests
+        run: bash ./gradlew assembleDebug lintDebug testDebugUnitTest assembleDebugAndroidTest --no-daemon
+      - name: Upload debug APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: food-debug
+          path: app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
+          retention-days: 7
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-reports
+          path: app/build/reports/
+          if-no-files-found: ignore
+          retention-days: 7
