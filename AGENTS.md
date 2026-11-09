@@ -1,10 +1,10 @@
-# 共通のAI開発ルール
+# food 開発ルール
 
 ## 目的と現在の段階
 
 - foodは、飲食店の注文・会員証・ポイントを共通の操作で使うアプリの構想です。
 - 現在はAndroid向けデモの初期段階です。Kotlin + Jetpack Compose、単一のappモジュールを使います。
-- 作業前にREADME.md、CONTRIBUTING.md、docs/decisions.mdと変更対象を確認してください。
+- 現在の機能と環境は `README.md`、採用済みの仕様や未決事項は `docs/decisions.md`、共同開発と検証の手順は `CONTRIBUTING.md` を参照してください。作業内容に関係する箇所と対象コードを確認してください。
 - Google Docsには構想・未決事項・AIの提案も含まれます。すべてを採用済みの実装仕様とみなさないでください。
 
 ## 共同作業と判断
@@ -28,9 +28,10 @@
 - Androidコードやビルド設定の変更時は、可能な範囲で次を実行してください。
   - Windows: `.\gradlew.bat assembleDebug lintDebug testDebugUnitTest assembleDebugAndroidTest`
   - macOS / Linux: `./gradlew assembleDebug lintDebug testDebugUnitTest assembleDebugAndroidTest`
-- UIを変更した場合は、接続済み実機またはエミュレーターで確認してください。利用できなければ未確認であることを明記してください。
+- UIを変更した場合は、接続済み実機またはエミュレーターで確認してください。UIスモークテストは `connectedDebugAndroidTest` で実行します。`assembleDebugAndroidTest` で確認できるのはテストのビルドまでです。端末を利用できない場合は未確認であることを明記してください。
 - 実行していないテストを成功と報告しないでください。変更点・確認結果・残る制約を簡潔に報告してください。
 - 文書だけの変更にAndroidビルドは不要です。
+- PRを作成する場合は `.github/pull_request_template.md` を使用してください。UIを変更した場合は、確認した端末とAndroidバージョン、画面の画像を記載してください。
 
 ## Cloudflare
 
